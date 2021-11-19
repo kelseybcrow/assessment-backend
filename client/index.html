@@ -5,8 +5,7 @@
   </head>
   <body class="container">
     <button id="complimentButton">Get a compliment</button>
-    <button id="fortuneButton">Get a fortune</button
-
+    <button id="fortuneButton">Get a fortune</button>
     <button id="foodButton">Get best foods</button>
     <button id="burritosButton">Add Burritos</button>
     <button id="ramenButton">Add Ramen</button>
@@ -47,7 +46,7 @@
 
             let foodList = document.createElement('p')
             ////// this is where I want to bring in the array of best foods from the back-end //////
-            foodList.innertext = data
+            foodList.innerHTML = data
             document.body.appendChild(foodList)
           });
       };
@@ -60,7 +59,7 @@
           .then(function (response) {
             const data = response.data;
             ////// this is where I want to bring in burrito from the best foods array in the back-end //////
-            document.foodList.appendChild(data);
+            document.body.foodList.appendChild(data);
           });
       };
 
@@ -70,7 +69,7 @@
           .then(function (response) {
             const data = response.data;
             ////// this is where I want to bring in ramen from the best foods array in the back-end //////
-            document.foodList.appendChild(data);
+            document.body.foodList.appendChild(data);
           });
       };
 
