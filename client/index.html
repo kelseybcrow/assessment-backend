@@ -6,13 +6,15 @@
   <body class="container">
     <button id="complimentButton">Get a compliment</button>
     <button id="fortuneButton">Get a fortune</button>
-    <h3>Favorite foods:</h3>
-    <ul>
-      <li>Pho</li>
+
+    <!-- Adding a form input for a POST request -->
+    <h3>Best foods:</h3>
+    <ul id="foodList">
       <li>Sushi</li>
+      <li>Nachos</li>
       <li>Dim sum</li>
-      <li>Ramen</li>
-      <button id="foodButton">Add another food</button>
+      <button id="burritosButton">Add Burritos</button>
+      <button id="ramenButton">Add Ramen</button>
     </ul>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -36,14 +38,40 @@
           });
       };
 
-      document.getElementById("fortuneButton").onclick = function () {
+      ////// front-end POST requests //////
+      const addBurritos = () => {
+        let burritos = document.createElement("input");
+        burritos.setAttribute("type", "text");
+        burritos.setAttribute("value", "burritos");
+        document.getElementById("foodList").appendChild(burritos);
+      };
+
+      document.getElementById("burritosButton").onclick = function () {
         axios
-          .get("http://localhost:4000/api/fortune/")
+          .post("http://localhost:4000/api/food/", addBurritos)
           .then(function (response) {
             const data = response.data;
             alert(data);
           });
       };
+
+      const addRamen = () => {
+        let ramen = document.createElement("input");
+        ramen.setAttribute("type", "text");
+        ramen.setAttribute("value", "burritos");
+        document.getElementById("foodList").appendChild(ramen);
+      };
+
+      document.getElementById("ramenButton").onclick = function () {
+        axios
+          .post("http://localhost:4000/api/food/", addRamen)
+          .then(function (response) {
+            const data = response.data;
+            alert(data);
+          });
+      };
+
+      ////// front-end PUT request //////
     </script>
   </body>
 </html>

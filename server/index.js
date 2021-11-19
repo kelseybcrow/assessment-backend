@@ -34,7 +34,18 @@ app.get("/api/fortune", (req, res) => {
   let randomIndex = Math.floor(Math.random() * fortunes.length);
   let randomFortune = fortunes[randomIndex];
 
-  res.status(200).send(randomFortunes);
+  res.status(200).send(randomFortune);
+});
+
+////// back-end POST requests //////
+app.post("/api/food", (req, res) => {
+  const burritos = "Burritos";
+  res.status(200).send(burritos);
+});
+
+app.post("/api/food", (req, res) => {
+  const ramen = "Ramen";
+  res.status(200).send(ramen);
 });
 
 app.listen(4000, () => console.log("Server running on 4000"));
