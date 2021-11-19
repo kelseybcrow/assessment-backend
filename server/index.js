@@ -38,14 +38,27 @@ app.get("/api/fortune", (req, res) => {
 });
 
 ////// back-end POST requests //////
+
+app.get("/api/food", (req, res) => {
+  const bestFood = ["Sushi", "Nachos", "Dim sum"];
+  res.status(200).send(bestFood);
+});
+
 app.post("/api/food", (req, res) => {
-  const burritos = "Burritos";
+  bestFood.push("Burritos");
+  const burritos = bestFood[3];
   res.status(200).send(burritos);
 });
 
 app.post("/api/food", (req, res) => {
-  const ramen = "Ramen";
+  bestFood.push("Ramen");
+  const ramen = bestFood[4];
   res.status(200).send(ramen);
+});
+
+////// back-end PUT request //////
+app.put("api/food", (req, res) => {
+  const alaska = "Alaska roll";
 });
 
 app.listen(4000, () => console.log("Server running on 4000"));
