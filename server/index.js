@@ -37,13 +37,13 @@ app.get("/api/fortune", (req, res) => {
   res.status(200).send(randomFortune);
 });
 
-////// back-end POST requests //////
-
+////// back-end new GET request //////
 app.get("/api/food", (req, res) => {
   const bestFood = ["Sushi", "Nachos", "Dim sum"];
   res.status(200).send(bestFood);
 });
 
+////// back-end POST requests //////
 app.post("/api/food", (req, res) => {
   bestFood.push("Burritos");
   const burritos = bestFood[3];
@@ -54,11 +54,6 @@ app.post("/api/food", (req, res) => {
   bestFood.push("Ramen");
   const ramen = bestFood[4];
   res.status(200).send(ramen);
-});
-
-////// back-end PUT request //////
-app.put("api/food", (req, res) => {
-  const alaska = "Alaska roll";
 });
 
 app.listen(4000, () => console.log("Server running on 4000"));
