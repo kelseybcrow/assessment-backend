@@ -44,12 +44,28 @@ app.get("/api/food", (req, res) => {
 
 ////// back-end POST requests //////
 app.post("/api/burritos", (req, res) => {
-  bestFood.push("Burritos");
+  let burritoAddedAlready = false;
+  for (let i = 0; i < bestFood.length; i++) {
+    if (bestFood[i] === "Burritos") {
+      burritoAddedAlready = true;
+    }
+  }
+  if (burritoAddedAlready === false) {
+    bestFood.push("Burritos");
+  }
   res.status(200).send(bestFood);
 });
 
 app.post("/api/ramen", (req, res) => {
-  bestFood.push("Ramen");
+  let ramenAddedAlready = false;
+  for (let i = 0; i < bestFood.length; i++) {
+    if (bestFood[i] === "Ramen") {
+      ramenAddedAlready = true;
+    }
+  }
+  if (ramenAddedAlready === false) {
+    bestFood.push("Ramen");
+  }
   res.status(200).send(bestFood);
 });
 

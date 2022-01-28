@@ -64,6 +64,9 @@
           .then((res) => {
             const data = res.data;
             console.log(data)
+            let foodListTitle = document.createElement('h3')
+            foodListTitle.innerHTML = 'Best foods:'
+            document.body.appendChild(foodListTitle)
             let foodList = document.createElement('p')
             foodList.innerHTML = data
             document.body.appendChild(foodList)
@@ -78,6 +81,9 @@
           .then((res) => {
             const data = res.data;
             console.log(data)
+            let foodListTitle = document.createElement('h3')
+            foodListTitle.innerHTML = 'Best foods:'
+            document.body.appendChild(foodListTitle)
             let foodList = document.createElement('p')
             foodList.innerHTML = data
             document.body.appendChild(foodList)
