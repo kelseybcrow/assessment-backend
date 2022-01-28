@@ -1,19 +1,27 @@
 const express = require("express");
+const app = express();
 const cors = require("cors");
 
-const app = express();
-
 app.use(cors());
+app.use(express.json());
 
-app.use(express.json()); // When we want to be able to accept JSON.
+const compliments = [
+  "Gee, you're a smart cookie!",
+  "Cool shirt!",
+  "Your Javascript skills are stellar.",
+];
+
+const fortunes = [
+  "You will meet someone important soon.",
+  "Your path will diverge from tradition dramatically.",
+  "You will know the answer to your question soon.",
+  "Your income will be as stable as your emotions are.",
+  "Your purpose will be revealed when you are ready.",
+];
+
+const bestFood = ["Sushi", "Nachos", "Dim sum", "Pho"];
 
 app.get("/api/compliment", (req, res) => {
-  const compliments = [
-    "Gee, you're a smart cookie!",
-    "Cool shirt!",
-    "Your Javascript skills are stellar.",
-  ];
-
   // choose random compliment
   let randomIndex = Math.floor(Math.random() * compliments.length);
   let randomCompliment = compliments[randomIndex];
@@ -22,14 +30,6 @@ app.get("/api/compliment", (req, res) => {
 });
 
 app.get("/api/fortune", (req, res) => {
-  const fortunes = [
-    "You will meet someone important soon.",
-    "Your path will diverge from tradition dramatically.",
-    "You will know the answer to your question soon.",
-    "Your income will be as stable as your emotions are.",
-    "Your purpose will be revealed when you are ready.",
-  ];
-
   // choose random fortune
   let randomIndex = Math.floor(Math.random() * fortunes.length);
   let randomFortune = fortunes[randomIndex];
@@ -39,21 +39,18 @@ app.get("/api/fortune", (req, res) => {
 
 ////// back-end new GET request //////
 app.get("/api/food", (req, res) => {
-  const bestFood = ["Sushi", "Nachos", "Dim sum"];
   res.status(200).send(bestFood);
 });
 
 ////// back-end POST requests //////
-app.post("/api/food", (req, res) => {
+app.post("/api/burritos", (req, res) => {
   bestFood.push("Burritos");
-  const burritos = bestFood[3];
-  res.status(200).send(burritos);
+  res.status(200).send(bestFood);
 });
 
-app.post("/api/food", (req, res) => {
+app.post("/api/ramen", (req, res) => {
   bestFood.push("Ramen");
-  const ramen = bestFood[4];
-  res.status(200).send(ramen);
+  res.status(200).send(bestFood);
 });
 
 app.listen(4000, () => console.log("Server running on 4000"));
