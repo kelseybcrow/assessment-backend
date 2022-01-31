@@ -33,43 +33,11 @@ app.get("/api/fortune", (req, res) => {
   res.status(200).send(randomFortune);
 });
 
-// const bestFood = ["Sushi", "Nachos", "Dim sum", "Pho"];
-
-// app.get("/api/food", (req, res) => {
-//   res.status(200).send(bestFood);
-// });
-
-// app.post("/api/burritos", (req, res) => {
-//   let burritoAddedAlready = false;
-//   for (let i = 0; i < bestFood.length; i++) {
-//     if (bestFood[i] === "Burritos") {
-//       burritoAddedAlready = true;
-//     }
-//   }
-//   if (burritoAddedAlready === false) {
-//     bestFood.push("Burritos");
-//   }
-//   res.status(200).send(bestFood);
-// });
-
-// app.post("/api/ramen", (req, res) => {
-//   let ramenAddedAlready = false;
-//   for (let i = 0; i < bestFood.length; i++) {
-//     if (bestFood[i] === "Ramen") {
-//       ramenAddedAlready = true;
-//     }
-//   }
-//   if (ramenAddedAlready === false) {
-//     bestFood.push("Ramen");
-//   }
-//   res.status(200).send(bestFood);
-// });
-
 const dogs = [];
 let id = 1;
 
 app.post("/api/dogs", (req, res) => {
-  const { dog } = req.body;
+  const { dogName, dogBreed } = req.body;
 
   let newDog = {
     id,
@@ -121,5 +89,37 @@ app.put("/api/dogs/:dogId", (req, res) => {
     }
   }
 });
+
+// const bestFood = ["Sushi", "Nachos", "Dim sum", "Pho"];
+
+// app.get("/api/food", (req, res) => {
+//   res.status(200).send(bestFood);
+// });
+
+// app.post("/api/burritos", (req, res) => {
+//   let burritoAddedAlready = false;
+//   for (let i = 0; i < bestFood.length; i++) {
+//     if (bestFood[i] === "Burritos") {
+//       burritoAddedAlready = true;
+//     }
+//   }
+//   if (burritoAddedAlready === false) {
+//     bestFood.push("Burritos");
+//   }
+//   res.status(200).send(bestFood);
+// });
+
+// app.post("/api/ramen", (req, res) => {
+//   let ramenAddedAlready = false;
+//   for (let i = 0; i < bestFood.length; i++) {
+//     if (bestFood[i] === "Ramen") {
+//       ramenAddedAlready = true;
+//     }
+//   }
+//   if (ramenAddedAlready === false) {
+//     bestFood.push("Ramen");
+//   }
+//   res.status(200).send(bestFood);
+// });
 
 app.listen(4000, () => console.log("Server running on 4000"));
