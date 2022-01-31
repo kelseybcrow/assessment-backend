@@ -30,19 +30,16 @@ app.get("/api/compliment", (req, res) => {
 });
 
 app.get("/api/fortune", (req, res) => {
-  // choose random fortune
   let randomIndex = Math.floor(Math.random() * fortunes.length);
   let randomFortune = fortunes[randomIndex];
 
   res.status(200).send(randomFortune);
 });
 
-////// back-end new GET request //////
 app.get("/api/food", (req, res) => {
   res.status(200).send(bestFood);
 });
 
-////// back-end POST requests //////
 app.post("/api/burritos", (req, res) => {
   let burritoAddedAlready = false;
   for (let i = 0; i < bestFood.length; i++) {
@@ -67,6 +64,38 @@ app.post("/api/ramen", (req, res) => {
     bestFood.push("Ramen");
   }
   res.status(200).send(bestFood);
+});
+
+const dogs = [];
+let id = 1;
+
+app.post("/api/dogs", (req, res) => {
+  const { dog } = req.body;
+
+  let newDog = {
+    id,
+    dog,
+  };
+
+  dogs.push(newDog);
+  id++;
+
+  res.status(200).send(dogs);
+});
+
+app.delete("/api/dogs/:dogId", (req, res) => {
+  const dogId = +req.params.dogId;
+  console.log(dogId);
+
+  const targetInd = dogs.findIndex((dogObject) => {
+    return dogObject.id === dogId;
+  });
+
+  const removed = dogs.splice(targetInd, 1);
+
+  res.status(200).send([removed[0], dogs]);
+
+  return dogObject.id === dogId;
 });
 
 app.listen(4000, () => console.log("Server running on 4000"));
