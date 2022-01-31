@@ -4,23 +4,26 @@
     <title>Back End Assessment</title>
   </head>
   <body class="container">
-    <div class="original-features">
+    <div class="basic-features">
       <button id="complimentButton">Get a compliment</button>
       <button id="fortuneButton">Get a fortune</button>
-
-      <button id="foodButton">Get best foods</button>
-      <button id="burritosButton">Add Burritos</button>
-      <button id="ramenButton">Add Ramen</button>
     </div>
 
     <div class="new-features">
       <form id="dog-form">
-        <input id="dog-input" type="text" placeholder="enter dog" />
-        <button>add dog</button>
+        <input id="dog-name-input" type="text" placeholder="enter dog name" />
+        <input id="dog-breed-input" type="text" placeholder="enter dog breed" />
+        <button>Add dog</button>
       </form>
 
       <ul id="dog-display"></ul>
     </div>
+
+    <!-- <div class="original-features">
+      <!-- <button id="foodButton">Get best foods</button>
+      <button id="burritosButton">Add Burritos</button>
+      <button id="ramenButton">Add Ramen</button> -->
+    </div> -->
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
@@ -45,57 +48,9 @@
           .catch((err) => console.log(err));
       };
 
-      document.getElementById("foodButton").onclick = () => {
-        axios
-          .get("http://localhost:4000/api/food/")
-          .then((res) => {
-            const data = res.data;
-            console.log(data);
-            let foodListTitle = document.createElement("h3");
-            foodListTitle.innerHTML = "Best foods:";
-            document.body.appendChild(foodListTitle);
-
-            let foodList = document.createElement("p");
-            foodList.innerHTML = data;
-            document.body.appendChild(foodList);
-          })
-          .catch((err) => console.log(err));
-      };
-
-      document.getElementById("burritosButton").onclick = () => {
-        axios
-          .post("http://localhost:4000/api/burritos/")
-          .then((res) => {
-            const data = res.data;
-            console.log(data);
-            let foodListTitle = document.createElement("h3");
-            foodListTitle.innerHTML = "Best foods:";
-            document.body.appendChild(foodListTitle);
-            let foodList = document.createElement("p");
-            foodList.innerHTML = data;
-            document.body.appendChild(foodList);
-          })
-          .catch((err) => console.log(err));
-      };
-
-      document.getElementById("ramenButton").onclick = () => {
-        axios
-          .post("http://localhost:4000/api/ramen/")
-          .then((res) => {
-            const data = res.data;
-            console.log(data);
-            let foodListTitle = document.createElement("h3");
-            foodListTitle.innerHTML = "Best foods:";
-            document.body.appendChild(foodListTitle);
-            let foodList = document.createElement("p");
-            foodList.innerHTML = data;
-            document.body.appendChild(foodList);
-          })
-          .catch((err) => console.log(err));
-      };
-
       const dogForm = document.querySelector("#dog-form");
-      const dogInput = document.querySelector("#dog-input");
+      const dogNameInput = document.querySelector("#dog-name-input");
+      const dogBreedInput = document.querySelector("#dog-breed-input");
       const dogDisplay = document.querySelector("#dog-display");
 
       const paintDogView = (arr) => {
@@ -146,6 +101,67 @@
           })
           .catch((err) => console.log(err));
       };
+
+      const baseURL = `http://localhost:4000/api/dogs`;
+
+      const dogsCallback = ({ data: dogs }) => paintDogView(dogs);
+      const errCallback = (err) => console.log(err.response.data);
+
+      const updateDog = (id) => {
+        axios
+          .put(`${baseURL}/${id}`, body)
+          .then(dogsCallback)
+          .catch(errCallback);
+      };
+
+      // document.getElementById("foodButton").onclick = () => {
+      //   axios
+      //     .get("http://localhost:4000/api/food/")
+      //     .then((res) => {
+      //       const data = res.data;
+      //       console.log(data);
+      //       let foodListTitle = document.createElement("h3");
+      //       foodListTitle.innerHTML = "Best foods:";
+      //       document.body.appendChild(foodListTitle);
+
+      //       let foodList = document.createElement("p");
+      //       foodList.innerHTML = data;
+      //       document.body.appendChild(foodList);
+      //     })
+      //     .catch((err) => console.log(err));
+      // };
+
+      // document.getElementById("burritosButton").onclick = () => {
+      //   axios
+      //     .post("http://localhost:4000/api/burritos/")
+      //     .then((res) => {
+      //       const data = res.data;
+      //       console.log(data);
+      //       let foodListTitle = document.createElement("h3");
+      //       foodListTitle.innerHTML = "Best foods:";
+      //       document.body.appendChild(foodListTitle);
+      //       let foodList = document.createElement("p");
+      //       foodList.innerHTML = data;
+      //       document.body.appendChild(foodList);
+      //     })
+      //     .catch((err) => console.log(err));
+      // };
+
+      // document.getElementById("ramenButton").onclick = () => {
+      //   axios
+      //     .post("http://localhost:4000/api/ramen/")
+      //     .then((res) => {
+      //       const data = res.data;
+      //       console.log(data);
+      //       let foodListTitle = document.createElement("h3");
+      //       foodListTitle.innerHTML = "Best foods:";
+      //       document.body.appendChild(foodListTitle);
+      //       let foodList = document.createElement("p");
+      //       foodList.innerHTML = data;
+      //       document.body.appendChild(foodList);
+      //     })
+      //     .catch((err) => console.log(err));
+      // };
     </script>
   </body>
 </html>

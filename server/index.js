@@ -19,10 +19,7 @@ const fortunes = [
   "Your purpose will be revealed when you are ready.",
 ];
 
-const bestFood = ["Sushi", "Nachos", "Dim sum", "Pho"];
-
 app.get("/api/compliment", (req, res) => {
-  // choose random compliment
   let randomIndex = Math.floor(Math.random() * compliments.length);
   let randomCompliment = compliments[randomIndex];
 
@@ -36,35 +33,37 @@ app.get("/api/fortune", (req, res) => {
   res.status(200).send(randomFortune);
 });
 
-app.get("/api/food", (req, res) => {
-  res.status(200).send(bestFood);
-});
+// const bestFood = ["Sushi", "Nachos", "Dim sum", "Pho"];
 
-app.post("/api/burritos", (req, res) => {
-  let burritoAddedAlready = false;
-  for (let i = 0; i < bestFood.length; i++) {
-    if (bestFood[i] === "Burritos") {
-      burritoAddedAlready = true;
-    }
-  }
-  if (burritoAddedAlready === false) {
-    bestFood.push("Burritos");
-  }
-  res.status(200).send(bestFood);
-});
+// app.get("/api/food", (req, res) => {
+//   res.status(200).send(bestFood);
+// });
 
-app.post("/api/ramen", (req, res) => {
-  let ramenAddedAlready = false;
-  for (let i = 0; i < bestFood.length; i++) {
-    if (bestFood[i] === "Ramen") {
-      ramenAddedAlready = true;
-    }
-  }
-  if (ramenAddedAlready === false) {
-    bestFood.push("Ramen");
-  }
-  res.status(200).send(bestFood);
-});
+// app.post("/api/burritos", (req, res) => {
+//   let burritoAddedAlready = false;
+//   for (let i = 0; i < bestFood.length; i++) {
+//     if (bestFood[i] === "Burritos") {
+//       burritoAddedAlready = true;
+//     }
+//   }
+//   if (burritoAddedAlready === false) {
+//     bestFood.push("Burritos");
+//   }
+//   res.status(200).send(bestFood);
+// });
+
+// app.post("/api/ramen", (req, res) => {
+//   let ramenAddedAlready = false;
+//   for (let i = 0; i < bestFood.length; i++) {
+//     if (bestFood[i] === "Ramen") {
+//       ramenAddedAlready = true;
+//     }
+//   }
+//   if (ramenAddedAlready === false) {
+//     bestFood.push("Ramen");
+//   }
+//   res.status(200).send(bestFood);
+// });
 
 const dogs = [];
 let id = 1;
@@ -74,7 +73,8 @@ app.post("/api/dogs", (req, res) => {
 
   let newDog = {
     id,
-    dog,
+    dogName,
+    dogBreed,
   };
 
   dogs.push(newDog);
@@ -96,6 +96,30 @@ app.delete("/api/dogs/:dogId", (req, res) => {
   res.status(200).send([removed[0], dogs]);
 
   return dogObject.id === dogId;
+});
+
+app.put("/api/dogs/:dogId", (req, res) => {
+  const { dogId } = req.params;
+  const { currentDogName, currentDogBreed } = req.params;
+  const { newDogName, newDogBreed } = req.body;
+  console.log(dogId);
+
+  const targetInd = dogs.findIndex((dogObject) => {
+    +dogObject.id === dogId;
+  });
+
+  for (let i = 0; i < dogs.length; i++) {
+    if (dogs[i].dogName === currentDogName) {
+      user[i].dogName = newDogName;
+      res.status(200).send("Dog name updated.");
+      return;
+    }
+    if (dogs[i].dogBreed === currentDogBreed) {
+      user[i].dogBreed = newDogBreed;
+      res.status(200).send("Dog breed updated.");
+      return;
+    }
+  }
 });
 
 app.listen(4000, () => console.log("Server running on 4000"));
